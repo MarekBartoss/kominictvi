@@ -1,0 +1,293 @@
+/* Reset and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #111;
+  color: #fff;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('assets/images/bckgrnd.png') center/cover no-repeat;
+  opacity: 0.1; /* adjust as you like */
+  z-index: -1;
+}
+
+/* --- HEADER STYLES --- */
+header {
+  background: #000;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+  min-height: 70px;
+  /* Desktop: Center logo pic + text */
+  justify-content: center;
+  gap: 10px; /* Space between pic and text */
+}
+
+/* New logo pic and text divs */
+.header-logo-pic a {
+  display: flex; /* Helps vertical alignment */
+  align-items: center;
+}
+.header-logo-text a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+}
+.header-logo-text a:hover {
+  color: #00cc66;
+}
+
+.logo-icon {
+  width: 50px;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* Desktop Navigation (default) */
+nav {
+  width: 100%;
+  background: #000;
+  border-bottom: 1px solid #222;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 0;
+  padding: 15px 0;
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 10px 5px; /* Added padding for the underline */
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 0;
+  width: calc(100% - 10px); /* Match padding */
+  height: 2px;
+  background-color: #00cc66;
+  transform: scaleX(0);
+  transform-origin: left; /* Makes animation wipe left-to-right */
+  transition: transform 0.3s ease-out;
+}
+
+nav a:hover {
+  color: #00cc66;
+}
+
+nav a:hover::after,
+nav a.active::after {
+  transform: scaleX(1); /* Show underline on hover or if active */
+}
+
+nav a.active {
+  color: #00cc66; /* Active link text color */
+}
+
+/* Hamburger */
+.hamburger {
+  display: none; /* Hidden on desktop */
+  width: 30px;
+  height: 24px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20; /* Above the nav overlay */
+}
+
+.hamburger span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+}
+
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 10px; }
+.hamburger span:nth-child(3) { top: 20px; }
+
+.hamburger.active span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+
+
+/* --- MOBILE STYLES --- */
+@media (max-width: 768px) {
+  .header-top {
+    /* Mobile: 3-column (left, center, right) */
+    justify-content: space-between; 
+    gap: 10px; /* Add gap for mobile spacing */
+  }
+
+  .header-logo-text {
+    flex: 1; /* Allows text to take center space */
+    text-align: center;
+    white-space: nowrap; /* Prevents text wrap */
+  }
+  
+  .header-logo-text a {
+    font-size: 0.9rem; /* Smaller logo text on mobile */
+    justify-content: center; /* Center the link text */
+  }
+  
+  .hamburger {
+    display: block; /* Show hamburger */
+  }
+  
+  /* This is the new slide-in menu */
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 100%;
+    height: 100vh;
+    background: #000; /* Solid black background */
+    
+    /* Center links vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: none;
+    transition: right 0.4s ease; /* Slide animation */
+    z-index: 15; /* Below hamburger */
+  }
+
+  nav.active {
+    right: 0; /* Slide in */
+  }
+
+  nav ul {
+    flex-direction: column; /* Stack links vertically */
+    gap: 20px;
+    padding: 0;
+    width: 100%;
+    /* FIX: Align text to the left inside the menu */
+    text-align: left;
+    padding-left: 40px; 
+  }
+
+  nav a {
+    font-size: 1.6rem; /* Bigger text for touch */
+  }
+
+  /* Hide underlines in mobile overlay */
+  nav a::after {
+    display: none;
+  }
+  
+  nav a.active {
+    color: #00cc66; /* Just show active color */
+  }
+}
+/* --- END OF HEADER STYLES --- */
+
+
+/* Main Content */
+main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Common Button Style */
+.btn {
+  background: linear-gradient(135deg, #00cc66, #009944);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+footer {
+  padding: 20px;
+  text-align: center;
+  background-color: #000;
+  color: #aaa;
+  font-size: 0.7rem;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+.footer-info {
+  text-align: center; /* center text on all screen sizes */
+}
+
+.footer-info a {
+  color: #00cc66;
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-info {
+    text-align: center;
+  }
+}

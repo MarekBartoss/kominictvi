@@ -9,7 +9,8 @@
   <title>Kontakt | KOMINICTVÍ PALKANIN - BARTOŠ s.r.o.</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
   <link rel="icon" href="assets/images/logoKominictviNoBcgrd.png" type="image/x-icon">
 </head>
 <body>
