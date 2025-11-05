@@ -1,6 +1,8 @@
 /* Gallery Page */
 .gallery-page {
-  max-width: 1000px;
+  /* OPRAVA: Zajistí, že se kontejner roztáhne na plnou šířku */
+  width: 100%; 
+  max-width: 1200px; 
   margin: 0 auto;
   padding: 40px 20px;
   text-align: center;
@@ -15,44 +17,11 @@
   z-index: 1;
 }
 
-.gallery-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 100%;
-}
-
-.gallery-container img {
-  width: 100%;
-  max-width: 800px;
-  height: auto;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  position: relative;
-  z-index: 1;
-  transform-origin: center center;
-}
-
-.gallery-list {
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.gallery-list img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
 /* Tabs */
 .tabs {
   display: inline-flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Větší mezera */
 }
 .tabs .tab {
   background: #000;
@@ -62,126 +31,154 @@
   padding: 10px 16px;
   border-radius: 8px;
   cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: 'Poppins', sans-serif;
 }
 .tabs .tab.active {
   border-color: #00cc66;
+  color: #00cc66;
   box-shadow: 0 0 0 2px rgba(0,204,102,0.2) inset;
 }
-.tabs .tab:hover { color: #00cc66; }
+.tabs .tab:hover:not(.active) { 
+  color: #00cc66;
+  border-color: #333;
+}
 
-/* Thumbnails (mobile list) */
-.gallery-list {
+/* NOVÁ MŘÍŽKA NÁHLEDŮ (nahrazuje .gallery-list)
+*/
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  /* OPRAVA: Zvětšena minimální velikost pro lepší vzhled */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px; /* Větší mezery */
   margin-top: 20px;
 }
-.gallery-list img {
+
+.gallery-grid img {
   width: 100%;
+  height: 220px; /* Mírně vyšší */
+  object-fit: cover; /* Ořízne obrázek, aby vyplnil prostor */
   border-radius: 8px;
   cursor: pointer;
   display: block;
-  transition: transform .2s ease, opacity .2s ease;
+  border: 1px solid #222; /* Jemný okraj */
+  
+  transition: transform 0.3s ease;
 }
-.gallery-list img:hover { transform: scale(1.02); opacity: 0.95; }
 
-/* On wider screens, keep main desktop gallery centered and thumbnails below */
-@media (min-width: 768px) {
-  .gallery-list {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 1000px;
-    margin: 24px auto 0;
-  }
+.gallery-grid img:hover { 
+  transform: scale(1.03); 
+  opacity: 0.85; 
 }
 
 
-/* Mobile view: list instead of gallery */
-@media (max-width: 768px) {
-  .gallery-container {
-    display: none;
-  }
-
-  .gallery-list {
-    display: flex;
-  }
+/* STYLY PRO NOVÝ LIGHTBOX MODAL
+*/
+body.lightbox-open {
+  overflow: hidden; /* Zabrání skrolování pozadí */
 }
 
-
-.gallery-container img.fullscreen {
-  transform: scale(1.6);
-  z-index: 999;
-}
-
-.gallery-container img:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-.gallery-container img.fullscreen {
-  position: relative;
-  z-index: 999;
-  transform: scale(1.6);
-}
-
-.gallery-container.fullscreen .arrow {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.gallery-container:not(.fullscreen) .arrow {
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: 0.5s;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #00cc66;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 5;
+/* ... (všechny ostatní styly pro .lightbox-modal zůstávají stejné) ... */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
   opacity: 1;
   transition: opacity 0.3s ease;
 }
 
-/* on desktop */
-.arrow.left {
-  left: -60px; /* outside the image */
-}
-
-.arrow.right {
-  right: -60px;
-}
-
-/* on mobile */
-@media (max-width: 768px) {
-  .arrow {
-    font-size: 1.5rem;
-    padding: 5px;
-  }
-
-  .arrow.left {
-    left: 10px; /* move inside image */
-  }
-
-  .arrow.right {
-    right: 10px;
-  }
-}
-
-
-/* Hide arrows when image is fullscreen */
-#mainImage.fullscreen ~ .arrow {
+.lightbox-modal.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-#mainImage:not(.fullscreen) ~ .arrow {
-  transition-delay: 0.5s;
-  opacity: 1;
-  pointer-events: auto;
+.lightbox-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 8px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+  /* Animace při změně obrázku */
+  animation: fadeIn 0.3s ease;
+}
+
+.lightbox-caption {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Tlačítka (šipky a zavření) */
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 3rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1002;
+  transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+  color: #00cc66;
+}
+
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 8px;
+  z-index: 1001;
+  transition: background 0.2s, color 0.2s;
+}
+
+.lightbox-arrow.left {
+  left: 20px;
+}
+
+.lightbox-arrow.right {
+  right: 20px;
+}
+
+.lightbox-arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+  color: #00cc66;
+}
+
+@media (max-width: 768px) {
+  .lightbox-arrow {
+    font-size: 1.5rem;
+    padding: 8px 12px;
+  }
+  .lightbox-arrow.left { left: 5px; }
+  .lightbox-arrow.right { right: 5px; }
+
+  .lightbox-close {
+    top: 5px;
+    right: 15px;
+    font-size: 2.5rem;
+  }
 }

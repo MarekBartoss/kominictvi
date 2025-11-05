@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/services.css">
+<link rel="stylesheet" href="css/animations.css"> <!-- PŘIDÁNO -->
 <link rel="icon" href="assets/images/logoKominictviNoBcgrd.png" type="image/x-icon">
 </head>
 <body>
@@ -20,33 +21,33 @@
 <main>
 <section class="services-page">
 
-
-
-<h1>Naše služby</h1>
+<!-- Přidána animace -->
+<h1 class="animate-on-load anim-fade-in-down anim-delay-100">Naše služby</h1>
 
 <div class="service-list">
 
-<div class="service-card" data-description="Výstavba třísložkových (vícevrstvých) komínových systémů dle platných norem a technických požadavků."><h2>Stavba vícevrstvých komínů</h2></div>
+<!-- Přidány třídy animace a zpoždění -->
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-200" data-description="Výstavba třísložkových (vícevrstvých) komínových systémů dle platných norem a technických požadavků."><h2>Stavba vícevrstvých komínů</h2></div>
 
-<div class="service-card" data-description="Odborná montáž komínových vložek pro zvýšení bezpečnosti a účinnosti odvodu spalin."><h2>Vložkování komínů</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-300" data-description="Odborná montáž komínových vložek pro zvýšení bezpečnosti a účinnosti odvodu spalin."><h2>Vložkování komínů</h2></div>
 
-<div class="service-card" data-description="Bezpečné a certifikované připojení krbů, kotlů a dalších spalovacích zařízení na komín."><h2>Připojování spotřebičů</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-400" data-description="Bezpečné a certifikované připojení krbů, kotlů a dalších spalovacích zařízení na komín."><h2>Připojování spotřebičů</h2></div>
 
-<div class="service-card" data-description="Provádíme kontroly a čištění dle nařízení vlády č. 91/2010 Sb., včetně vystavení revizní zprávy."><h2>Revize spalinových cest</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-200" data-description="Provádíme kontroly a čištění dle nařízení vlády č. 91/2010 Sb., včetně vystavení revizní zprávy."><h2>Revize spalinových cest</h2></div>
 
-<div class="service-card" data-description="Pravidelné čištění komínů pro zajištění bezpečného provozu a prevence požárů."><h2>Kontrola a čištění spalinových cest</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-300" data-description="Pravidelné čištění komínů pro zajištění bezpečného provozu a prevence požárů."><h2>Kontrola a čištění spalinových cest</h2></div>
 
-<div class="service-card" data-description="Profesionální měření pro malé zdroje tepla do 200 kW – s vystavením zprávy pro úřady."><h2>Měření účinnosti spalování</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-400" data-description="Profesionální měření pro malé zdroje tepla do 200 kW – s vystavením zprávy pro úřady."><h2>Měření účinnosti spalování</h2></div>
 
-<div class="service-card" data-description="Odborná dokumentace a posouzení stavu komínových a spalinových cest."><h2>Technické posudky</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-200" data-description="Odborná dokumentace a posouzení stavu komínových a spalinových cest."><h2>Technické posudky</h2></div>
 
-<div class="service-card" data-description="Zmapování všech komínových těles, včetně dokumentace pro projekt nebo správu objektu."><h2>Pasportizace komínů</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-300" data-description="Zmapování všech komínových těles, včetně dokumentace pro projekt nebo správu objektu."><h2>Pasportizace komínů</h2></div>
 
-<div class="service-card" data-description="Inspekce komínů průmyslovou kamerou – ideální pro zjištění závad nebo ověření průchodnosti."><h2>Prohlídky kamerou</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-400" data-description="Inspekce komínů průmyslovou kamerou – ideální pro zjištění závad nebo ověření průchodnosti."><h2>Prohlídky kamerou</h2></div>
 
-<div class="service-card" data-description="Zajistíme frézování stávajících komínů pro zvětšení průměru nebo přípravu na vložkování."><h2>Frézování komínů</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-200" data-description="Zajistíme frézování stávajících komínů pro zvětšení průměru nebo přípravu na vložkování."><h2>Frézování komínů</h2></div>
 
-<div class="service-card" data-description="Navrhneme a spočítáme optimální parametry pro nové i rekonstruované spalinové systémy."><h2>Výpočty spalinových cest</h2></div>
+<div class="service-card animate-on-load anim-fade-in-up anim-delay-300" data-description="Navrhneme a spočítáme optimální parametry pro nové i rekonstruované spalinové systémy."><h2>Výpočty spalinových cest</h2></div>
 
 </div>
 </section>
@@ -64,6 +65,7 @@
 
 <?php include 'footer.php'; ?>
 
+<!-- Tento skript zůstává nezměněn -->
 <script>
 const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal-title');

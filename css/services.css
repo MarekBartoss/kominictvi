@@ -109,6 +109,7 @@
 }
 
 #modal-close {
+  font-family: Poppins, sans-serif;
   margin-top: 20px;
   padding: 8px 16px;
   background: #00cc66;

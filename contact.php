@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/animations.css"> <!-- PŘIDÁNO -->
   <link rel="icon" href="assets/images/logoKominictviNoBcgrd.png" type="image/x-icon">
 </head>
 <body>
@@ -19,9 +20,11 @@
 
 <main>
   <section class="contact-page">
-    <h1>Kontakt</h1>
+    <!-- Přidána animace -->
+    <h1 class="animate-on-load anim-fade-in-down anim-delay-100">Kontakt</h1>
 
-    <div class="contact-grid">
+    <!-- Přidána animace na celý grid -->
+    <div class="contact-grid animate-on-load anim-fade-in-up anim-delay-300">
       <div class="contact-info">
         <p><strong>KOMINICTVÍ PALKANIN – BARTOŠ s.r.o.</strong></p>
         <p>Schnirchova 28, 170 00 Praha 7</p>
@@ -56,3 +59,5 @@
 
 
 <?php include 'footer.php'; ?>
+</body>
+</html>

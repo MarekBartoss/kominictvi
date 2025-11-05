@@ -57,7 +57,7 @@ header {
   text-decoration: none;
   color: #fff;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   transition: color 0.3s ease;
 }
 .header-logo-text a:hover {
@@ -77,6 +77,11 @@ nav {
   border-bottom: 1px solid #222;
 }
 
+/* Logo v mobilní navigaci (skryté na desktopu) */
+.nav-mobile-logo {
+  display: none;
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -84,43 +89,69 @@ nav ul {
   gap: 25px;
   margin: 0;
   padding: 15px 0;
+  position: relative; /* Potřebné pro pozicování čáry */
+}
+
+/* ÚPRAVA: Odkazy v li (li se použije pro výpočet pozice)
+  Přidáváme padding na <li> místo <a> pro přesnější měření.
+*/
+nav ul li {
+  padding: 10px 5px; /* Původní padding z <a> */
 }
 
 nav a {
-  position: relative;
+  /* position: relative;  <-- SMAZÁNO */
   text-decoration: none;
   color: #fff;
   font-weight: 600;
   font-size: 1.2rem;
-  padding: 10px 5px; /* Added padding for the underline */
+  /* padding: 10px 5px;  <-- SMAZÁNO (přesunuto na <li>) */
   transition: color 0.3s ease;
+  display: block; /* Důležité pro správné chování */
 }
 
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 5px;
-  bottom: 0;
-  width: calc(100% - 10px); /* Match padding */
-  height: 2px;
-  background-color: #00cc66;
-  transform: scaleX(0);
-  transform-origin: left; /* Makes animation wipe left-to-right */
-  transition: transform 0.3s ease-out;
-}
+/* nav a::after (SMAZÁNO) */
+/* --- ODSTRANĚNY STYLY PRO nav a::after --- */
+
 
 nav a:hover {
   color: #00cc66;
 }
 
-nav a:hover::after,
-nav a.active::after {
-  transform: scaleX(1); /* Show underline on hover or if active */
-}
+/* nav a:hover::after, nav a.active::after (SMAZÁNO) */
+/* --- ODSTRANĚNY STYLY PRO nav a:hover::after, nav a.active::after --- */
+
 
 nav a.active {
   color: #00cc66; /* Active link text color */
 }
+
+/* NOVÝ STYL PRO POSUVNOU ČÁRU */
+.nav-underline {
+  position: absolute;
+  /* OPRAVA 1: 
+    Posunuto z 'bottom: 0;' na 'bottom: 20px;'.
+    (Vypočet: 15px padding <ul> + 10px padding <li> = 25px mezera. 
+     Chceme 5px mezeru, takže 25px - 5px = 20px posun odspodu.)
+  */
+  bottom: 20px; 
+  left: 0; /* Začátek bude řízen pomocí transform: translateX() */
+  height: 2px;
+  background-color: #00cc66;
+  /* OPRAVA 2: 
+    'transition' je odsud odebrána, aby se zabránilo animaci při načtení.
+  */
+  pointer-events: none; /* Nebude blokovat kliknutí na odkazy */
+}
+
+/* OPRAVA 2 (pokračování):
+  Animace se přidá pouze na třídu '.nav-underline-animated', 
+  kterou JavaScript přidá až PO načtení stránky.
+*/
+.nav-underline.nav-underline-animated {
+  transition: transform 0.3s ease-out, width 0.3s ease-out;
+}
+
 
 /* Hamburger */
 .hamburger {
@@ -188,18 +219,34 @@ nav a.active {
     height: 100vh;
     background: #000; /* Solid black background */
     
+    border: none; /* Vynuluje ostatní okraje */
+    border-left: 4px solid #00cc66; /* Přidá zelený pruh */
+    
+    
     /* Center links vertically */
     display: flex;
+    flex-direction: column; /* Seřadí logo a menu pod sebe */
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Zarovná vše doleva (respektuje padding) */
     
-    border: none;
     transition: right 0.4s ease; /* Slide animation */
     z-index: 15; /* Below hamburger */
   }
 
   nav.active {
     right: 0; /* Slide in */
+  }
+
+  /* STYL PRO LOGO UVNITŘ MOBILNÍ NAVIGACE */
+  nav .nav-mobile-logo {
+    display: block;
+    width: 100px; /* Nebo jiná velikost, která se vám líbí */
+    margin-left: 40px; /* Stejný levý okraj jako text */
+    margin-bottom: 30px; /* Mezera pod logem */
+  }
+  nav .nav-mobile-logo img {
+    width: 100%;
+    height: auto;
   }
 
   nav ul {
@@ -211,13 +258,19 @@ nav a.active {
     text-align: left;
     padding-left: 40px; 
   }
+  
+  /* ÚPRAVA: Na mobilu vracíme padding na <a> */
+  nav ul li {
+    padding: 0;
+  }
 
   nav a {
     font-size: 1.6rem; /* Bigger text for touch */
+    padding: 0; /* Vynulování paddingu z desktopu */
   }
 
-  /* Hide underlines in mobile overlay */
-  nav a::after {
+  /* Na mobilu skryjeme posuvnou čáru */
+  .nav-underline {
     display: none;
   }
   
@@ -267,6 +320,7 @@ footer {
   max-width: 1000px;
   margin: 0 auto;
   line-height: 1.4;
+  position: relative; /* Přidáno pro pozicování loga */
 }
 
 .footer-info {
@@ -282,6 +336,27 @@ footer {
   text-decoration: underline;
 }
 
+/* STYLY PRO LOGO VE FOOTERU */
+.footer-logo {
+  position: absolute;
+  right: 20px;
+  bottom: 50%; /* Zarovná vertikálně na střed footeru */
+  transform: translateY(50%);
+  width: 80px; /* Upravte velikost podle potřeby */
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.footer-logo:hover {
+  opacity: 1;
+}
+
+
 @media (max-width: 768px) {
   .footer-flex {
     flex-direction: column;
@@ -289,5 +364,21 @@ footer {
   }
   .footer-info {
     text-align: center;
+  }
+
+  /* ÚPRAVA PRO MOBILNÍ FOOTER */
+  .footer-content {
+    padding-right: 0; /* Na mobilu není potřeba */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Mezera mezi textem a logem */
+  }
+
+  .footer-logo {
+    position: static; /* Zruší absolutní pozici */
+    transform: none; /* Zruší transformaci */
+    width: 60px; /* Menší logo na mobilu */
+    margin-top: 10px; /* Mezera nad logem */
   }
 }

@@ -16,7 +16,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="css/style.css"> 
   <link rel="icon" href="assets/images/logoKominictviNoBcgrd.png" type="image/x-icon">
 </head>
 <body>
@@ -44,6 +44,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   </div>
 
   <nav>
+    <!-- NOVÉ LOGO PRO MOBILNÍ MENU -->
+    <a href="index.php" class="nav-mobile-logo">
+      <img src="assets/images/logoKominictviWhite.png" alt="Logo Kominictví">
+    </a>
+    
     <ul>
       <li><a href="index.php" class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>">Úvod</a></li>
       <li><a href="services.php" class="<?= ($currentPage == 'services.php') ? 'active' : '' ?>">Služby</a></li>
@@ -51,18 +56,88 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       <li><a href="gallery.php" class="<?= ($currentPage == 'gallery.php') ? 'active' : '' ?>">Galerie</a></li>
       <li><a href="about.php" class="<?= ($currentPage == 'about.php') ? 'active' : '' ?>">O nás</a></li>
       <li><a href="contact.php" class="<?= ($currentPage == 'contact.php') ? 'active' : '' ?>">Kontakt</a></li>
+      
+      <!-- NOVÝ ELEMENT PRO POSUVNOU ČÁRU -->
+      <span class="nav-underline"></span>
     </ul>
   </nav>
 
 </header>
 
 <script>
-  // This script remains the same
+  // Původní skript pro hamburger
   const hamburger = document.querySelector('.hamburger');
   const nav = document.querySelector('nav');
 
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     nav.classList.toggle('active');
+  });
+  
+  
+  // NOVÝ SKRIPT PRO POSUVNOU ČÁRU
+  document.addEventListener('DOMContentLoaded', () => {
+    const navList = document.querySelector('nav ul');
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const underline = document.querySelector('.nav-underline');
+    const activeLink = document.querySelector('nav ul li a.active');
+
+    // Funkce pro nastavení pozice čáry
+    function setUnderlinePosition(link) {
+      if (link) {
+        const parentLi = link.parentElement;
+        underline.style.width = `${parentLi.clientWidth}px`;
+        underline.style.transform = `translateX(${parentLi.offsetLeft}px)`;
+      }
+    }
+
+    // OPRAVA: Vytvoříme asynchronní funkci, která počká na fonty
+    async function initializeUnderline() {
+      try {
+        // 1. POČKÁ, AŽ BUDOU FONTY NAČTENY
+        await document.fonts.ready;
+
+        // 2. Nastaví čáru na aktivní položku (teď už se SPRÁVNÝM fontem)
+        setUnderlinePosition(activeLink);
+
+        // 3. Přidá třídu pro animaci (s malou prodlevou pro vykreslení)
+        setTimeout(() => {
+          if (underline) {
+            underline.classList.add('nav-underline-animated');
+          }
+        }, 50);
+
+      } catch (err) {
+        // Fallback, kdyby načítání fontů selhalo
+        console.warn('Načítání fontů selhalo, čára se může zobrazit nepřesně.', err);
+        setUnderlinePosition(activeLink);
+        setTimeout(() => {
+          if (underline) {
+            underline.classList.add('nav-underline-animated');
+          }
+        }, 50);
+      }
+    }
+
+    // Zavoláme novou inicializační funkci, která čeká na fonty
+    initializeUnderline();
+
+    // 3. Sleduje hover nad všemi odkazy
+    navLinks.forEach(link => {
+      link.parentElement.addEventListener('mouseenter', () => {
+        setUnderlinePosition(link);
+      });
+    });
+
+    // 4. Vrátí čáru zpět na aktivní položku, když myš opustí celé menu
+    navList.addEventListener('mouseleave', () => {
+      setUnderlinePosition(activeLink);
+    });
+    
+    // 5. Přepočítá pozici při změně velikosti okna (důležité pro responzivitu)
+    window.addEventListener('resize', () => {
+      const currentActiveLink = document.querySelector('nav ul li a.active');
+      setUnderlinePosition(currentActiveLink);
+    });
   });
 </script>

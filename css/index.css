@@ -5,40 +5,185 @@
 }
 
 .hero h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-  animation: fadeInDown 1s ease;
+  font-size: 2.5rem; /* Větší */
+  font-weight: 700;  /* Tučnější */
+  color: #fff;        /* Jasně bílá */
+  line-height: 1.2;
+  margin-top: 20px;
+  margin-bottom: 30px; /* Větší mezera pod sloganem */
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7); /* Mírně silnější stín */
+  /* ODSTRANĚNA: animace (přesunuto do animations.css) */
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.3rem; /* Také mírně větší */
   color: #ccc;
-  margin-bottom: 30px;
-  opacity: 0;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.5s; /* starts after h1 finishes */
+  margin-bottom: 0; /* Tlačítko je pryč, není potřeba mezera */
+  /* ODSTRANĚNA: opacity, animace a delay (přesunuto do animations.css) */
 }
 
-/* Animations */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+/* ODSTRANĚNY: @keyframes fadeInDown a @keyframes fadeInUp.
+  Nyní jsou v css/animations.css
+*/
+
+
+/* --- NOVÉ STYLY PRO INDEX.PHP --- */
+
+/* Obecný nadpis sekce */
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+/* Úprava layoutu main */
+main {
+  flex-direction: column; /* Sekce půjdou pod sebe */
+  justify-content: flex-start; /* Zarovná obsah nahoru */
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.hero {
+  margin-bottom: 60px; /* Přidá mezeru pod hero sekci */
+}
+
+/* --- Sekce Proč si vybrat nás (Features) --- */
+.features-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  margin-bottom: 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.feature-card {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #222;
+}
+
+.feature-card i {
+  font-size: 2.5rem;
+  color: #00cc66;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+/* --- Sekce Vybrané služby (Services Preview) --- */
+.services-preview {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  margin-bottom: 40px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.service-preview-card {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #222;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-preview-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  border-color: #00cc66;
+}
+
+.service-preview-card h3 {
+  font-size: 1.3rem;
+  color: #00cc66;
+  margin-bottom: 10px;
+}
+
+.service-preview-card p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+
+/* --- Sekce O nás (About Preview) --- */
+.about-preview {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+}
+
+.about-preview .section-title {
+  font-size: 1.8rem; /* Trochu menší nadpis */
+}
+
+.about-text {
+  font-size: 1.1rem;
+  color: #ccc;
+  line-height: 1.7;
+  max-width: 750px;
+  margin: 0 auto 30px auto;
+}
+
+/* --- Responzivita pro nové sekce --- */
+
+@media (max-width: 992px) {
+  .features-grid,
+  .services-grid {
+    grid-template-columns: 1fr; /* Vše pod sebe na tabletech */
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .section-title {
+    font-size: 1.8rem;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@media (max-width: 768px) {
+  main {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .features-section,
+  .services-preview,
+  .about-preview {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem; /* Zmenšení na mobilu */
+  }
+  
+  .hero p {
+    font-size: 1.1rem; /* Zmenšení na mobilu */
   }
 }
