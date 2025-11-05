@@ -1,10 +1,20 @@
 /* Reset and base styles */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+/* OPRAVA 1: Vynucení tmavého režimu pro prohlížeče (Samsung Internet) */
+:root {
+  color-scheme: dark only;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* OPRAVA 1 (pokračování): Zajištění, že pozadí je vždy tmavé */
+html {
+  background-color: #111;
 }
 
 body {
@@ -15,7 +25,23 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
+  /* ODSTRANĚNO: -webkit-tap-highlight-color: transparent; (přesunuto níže) */
 }
+
+/* OPRAVA 2: Vložen váš kód pro vypnutí "blue box" na odkazech a tlačítkách.
+*/
+button,
+[onclick] {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* Konec OPRAVY 2 */
+
 
 body::before {
   content: "";

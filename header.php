@@ -6,6 +6,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
+  
+  <!-- 
+    OPRAVA 1: Přidána meta značka, která říká prohlížečům (Samsung Internet atd.), 
+    aby nevynucovaly vlastní tmavý režim, protože web už je tmavý.
+  -->
+  <meta name="color-scheme" content="dark only">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="KOMINICTVÍ PALKANIN - BARTOŠ s.r.o. – Profesionální kominické služby v Praze. Čištění, revize, vložkování komínů.">
   <meta name="keywords" content="kominík, kominictví, revize komínu, Praha, spalinové cesty, vložkování komínu">
@@ -21,12 +28,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </head>
 <body>
 <header>
+<!-- ... zbytek souboru header.php zůstává stejný ... -->
   <div class="header-top">
     
     <!-- Div 1: Logo Pic (Left on Mobile) -->
     <div class="header-logo-pic">
       <a href="index.php">
-        <img src="assets/images/logoKominictviWhite.png" alt="Logo" class="logo-icon">
+        <img src="assets/images/logoBW.png" alt="Logo" class="logo-icon">
       </a>
     </div>
 
@@ -46,7 +54,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <nav>
     <!-- NOVÉ LOGO PRO MOBILNÍ MENU -->
     <a href="index.php" class="nav-mobile-logo">
-      <img src="assets/images/logoKominictviWhite.png" alt="Logo Kominictví">
+      <img src="assets/images/logoBW.png" alt="Logo Kominictví">
     </a>
     
     <ul>

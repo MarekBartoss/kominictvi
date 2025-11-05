@@ -29,8 +29,9 @@
         <p><strong>KOMINICTVÍ PALKANIN – BARTOŠ s.r.o.</strong></p>
         <p>Schnirchova 28, 170 00 Praha 7</p>
 
-        <p><strong>Tel./Fax:</strong> 220 801 773<br>
-        <strong>Mobil:</strong> 728 819 270<br>
+        <!-- OPRAVA: Přidány tel: odkazy -->
+        <p><strong>Tel./Fax:</strong> <a href="tel:+420220801773">220 801 773</a><br>
+        <strong>Mobil:</strong> <a href="tel:+420728819270">728 819 270</a><br>
         <strong>Email:</strong> <a href="mailto:kominictvipalkanin@seznam.cz">kominictvipalkanin@seznam.cz</a></p>
 
         <p><strong>IČO:</strong> 27134351<br>
